@@ -135,7 +135,10 @@ export default function ProductDetail() {
             initial={{ scaleX: 1 }}
             src={product.imageUrl || ""}
             alt={product.name}
-            className="w-[80%] max-h-[80%] object-contain drop-shadow-[0_0_40px_rgba(255,255,255,0.15)] select-none pointer-events-none"
+            className="w-[80%] max-h-[80%] object-contain select-none pointer-events-none"
+            style={{
+              filter: "drop-shadow(0 0 55px rgba(140,120,255,0.35)) drop-shadow(0 0 22px rgba(255,255,255,0.22))",
+            }}
           />
         </motion.div>
 
