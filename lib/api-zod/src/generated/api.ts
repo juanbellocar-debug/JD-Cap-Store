@@ -8,11 +8,46 @@
 import * as zod from "zod";
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
+});
+
+/**
+ * @summary Register a new admin user
+ */
+export const registerBodyPasswordMin = 6;
+
+export const RegisterBody = zod.object({
+  email: zod.string().email(),
+  password: zod.string().min(registerBodyPasswordMin),
+});
+
+/**
+ * @summary Login
+ */
+export const loginBodyPasswordMin = 6;
+
+export const LoginBody = zod.object({
+  email: zod.string().email(),
+  password: zod.string().min(loginBodyPasswordMin),
+});
+
+export const LoginResponse = zod.object({
+  token: zod.string(),
+  user: zod.object({
+    id: zod.number(),
+    email: zod.string(),
+  }),
+});
+
+/**
+ * @summary Get current user
+ */
+export const GetMeResponse = zod.object({
+  id: zod.number(),
+  email: zod.string(),
 });
 
 /**
@@ -37,6 +72,38 @@ export const ListProductsResponseItem = zod.object({
 export const ListProductsResponse = zod.array(ListProductsResponseItem);
 
 /**
+ * @summary Create a product (admin)
+ */
+export const CreateProductBody = zod.object({
+  name: zod.string(),
+  brand: zod.string(),
+  price: zod.number(),
+  imageUrl: zod.string().optional(),
+  imageBackUrl: zod.string().nullish(),
+  description: zod.string().nullish(),
+  available: zod.boolean().optional(),
+  featured: zod.boolean().optional(),
+});
+
+/**
+ * @summary Get featured products
+ */
+export const GetFeaturedProductsResponseItem = zod.object({
+  id: zod.number(),
+  name: zod.string(),
+  brand: zod.string(),
+  price: zod.number(),
+  imageUrl: zod.string(),
+  imageBackUrl: zod.string().nullish(),
+  description: zod.string().nullish(),
+  available: zod.boolean(),
+  featured: zod.boolean().optional(),
+});
+export const GetFeaturedProductsResponse = zod.array(
+  GetFeaturedProductsResponseItem,
+);
+
+/**
  * @summary Get a single product
  */
 export const GetProductParams = zod.object({
@@ -56,20 +123,24 @@ export const GetProductResponse = zod.object({
 });
 
 /**
- * @summary List all brands
+ * @summary Update a product (admin)
  */
-export const ListBrandsResponseItem = zod.object({
-  id: zod.number(),
-  name: zod.string(),
-  slug: zod.string(),
-  logoUrl: zod.string().nullish(),
+export const UpdateProductParams = zod.object({
+  id: zod.coerce.number(),
 });
-export const ListBrandsResponse = zod.array(ListBrandsResponseItem);
 
-/**
- * @summary Get featured/hero products
- */
-export const GetFeaturedProductsResponseItem = zod.object({
+export const UpdateProductBody = zod.object({
+  name: zod.string(),
+  brand: zod.string(),
+  price: zod.number(),
+  imageUrl: zod.string().optional(),
+  imageBackUrl: zod.string().nullish(),
+  description: zod.string().nullish(),
+  available: zod.boolean().optional(),
+  featured: zod.boolean().optional(),
+});
+
+export const UpdateProductResponse = zod.object({
   id: zod.number(),
   name: zod.string(),
   brand: zod.string(),
@@ -80,9 +151,28 @@ export const GetFeaturedProductsResponseItem = zod.object({
   available: zod.boolean(),
   featured: zod.boolean().optional(),
 });
-export const GetFeaturedProductsResponse = zod.array(
-  GetFeaturedProductsResponseItem,
-);
+
+/**
+ * @summary Delete a product (admin)
+ */
+export const DeleteProductParams = zod.object({
+  id: zod.coerce.number(),
+});
+
+export const DeleteProductResponse = zod.object({
+  success: zod.boolean(),
+});
+
+/**
+ * @summary List all brands
+ */
+export const ListBrandsResponseItem = zod.object({
+  id: zod.number(),
+  name: zod.string(),
+  slug: zod.string(),
+  logoUrl: zod.string().nullish(),
+});
+export const ListBrandsResponse = zod.array(ListBrandsResponseItem);
 
 /**
  * @summary Get cart contents
