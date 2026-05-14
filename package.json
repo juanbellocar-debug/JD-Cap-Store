@@ -2,12 +2,26 @@
   "name": "workspace",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {
-    "build": "pnpm run typecheck && pnpm -r --if-present run build",
-    "typecheck:libs": "tsc --build",
-    "typecheck": "pnpm run typecheck:libs && pnpm -r --filter \"./artifacts/**\" --filter \"./scripts\" --if-present run typecheck"
-  },
   "private": true,
+  "workspaces": [
+    "artifacts/space-caps",
+    "artifacts/admin",
+    "artifacts/api-server",
+    "lib/api-client-react",
+    "lib/api-zod",
+    "lib/db",
+    "lib/api-spec",
+    "scripts"
+  ],
+  "scripts": {
+    "build": "npm run build:store && npm run build:admin && npm run build:api",
+    "build:api": "npm run build --workspace=artifacts/api-server",
+    "build:store": "BASE_PATH=/ npm run build --workspace=artifacts/space-caps",
+    "build:admin": "BASE_PATH=/admin/ npm run build --workspace=artifacts/admin",
+    "start": "node artifacts/api-server/dist/index.mjs",
+    "typecheck:libs": "tsc --build",
+    "typecheck": "npm run typecheck:libs && npm run typecheck --workspaces --if-present"
+  },
   "devDependencies": {
     "typescript": "~5.9.2",
     "prettier": "^3.8.1"
