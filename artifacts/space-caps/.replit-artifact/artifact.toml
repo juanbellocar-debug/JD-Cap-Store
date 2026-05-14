@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Space Caps Store"
+version = "1.0.0"
+id = "artifacts/space-caps"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20957
+
+[services.development]
+run = "pnpm --filter @workspace/space-caps run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/space-caps", "run", "build" ]
+publicDir = "artifacts/space-caps/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20957"
+BASE_PATH = "/"

@@ -1,0 +1,76 @@
+Crea una tienda online premium de gorras streetwear con estética “Deep Space / Y2K Cyber / Luxury Space Store”.
+🌌 ESTILO GENERAL
+Fondo negro puro (#000000) con campo de estrellas animado (deep space).
+Estética minimalista, futurista, tipo tienda de lujo.
+Sensación de productos flotando en el espacio.
+Diseño limpio, moderno y premium.
+He enviado imágenes de referencia del diseño, fondo y estilo visual. Úsalas como guía principal para replicar exactamente la estética, iluminación y composición.
+🧭 HEADER
+Barra superior minimalista en texto blanco.
+Categorías:
+“11 BAYS”, “A BATHING APE”, “BARRAS HATS”, “DANDY HATS”
+Sin fondos sólidos ni bordes.
+Tipografía sans-serif moderna (Inter o similar).
+🔍 BUSCADOR
+Placeholder: “Busca tus productos favoritos”
+Al escribir:
+imagen del producto
+nombre
+precio
+Dropdown limpio y minimalista.
+🧢 CATÁLOGO DE PRODUCTOS
+Grid de productos con imágenes PNG (fondo transparente).
+Efecto: las gorras flotan sobre el espacio.
+Cada producto incluye:
+Marca arriba
+Nombre del modelo entre comillas
+Precio en blanco
+Hover:
+Aparece botón “ADD TO CART” con animación suave.
+🛒 PÁGINA DE PRODUCTO
+Al hacer clic en un producto:
+Imagen principal grande centrada
+Panel derecho con:
+Botón principal: “COMPRAR AHORA” (fondo blanco, texto negro)
+Botón secundario: “AÑADIR AL CARRITO” (outline blanco)
+Sección de información:
+ENVÍOS & DEVOLUCIONES
+descripción del producto
+🔄 VISOR 360 INTERACTIVO (IMPORTANTE)
+Implementa un visor de producto 360 interactivo con estas funciones:
+El usuario puede tocar y arrastrar la gorra hacia la izquierda o derecha para rotarla libremente en 360 grados.
+La rotación debe ser suave, continua y responsiva al movimiento del mouse o dedo.
+Debe poder detenerse en cualquier ángulo.
+Selectores inferiores:
+Añade dos botones/cuadrados:
+Uno blanco (vista frontal)
+Uno negro (vista trasera)
+Comportamiento:
+Al hacer hover o click en los selectores:
+El visor gira automáticamente a la vista correspondiente
+Transición suave (ease-in-out)
+La animación debe sentirse natural, tipo producto premium de ecommerce moderno.
+🛍️ CARRITO LATERAL (DRAWER)
+Se abre desde la derecha
+Muestra:
+imagen del producto
+nombre
+precio
+botón “FINALIZAR COMPRA”
+Animación suave tipo slide
+🎨 UI STYLE GUIDE
+Fondo: #000000
+Texto principal: #FFFFFF
+Texto secundario: #AAAAAA
+Botones: blanco con texto negro
+Bordes suaves (2–4px)
+Animaciones suaves: fade, hover, slide
+Estilo: premium, minimalista, futurista
+⚡ REGLAS IMPORTANTES
+Todo debe sentirse como una marca de streetwear de lujo en el espacio.
+Las gorras deben parecer flotando en el fondo.
+Diseño limpio, sin saturación visual.
+Inspirado en ecommerce moderno tipo Shopify pero futurista.
+Usar imágenes de referencia enviadas como guía exacta de estilo.
+🔥 OBJETIVO FINAL
+Una tienda de gorras ultra premium estilo “space luxury streetwear” con interacción avanzada (incluyendo visor 360), lista para parecer un ecommerce real de marca
