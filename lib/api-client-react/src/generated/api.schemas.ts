@@ -9,6 +9,22 @@ export interface HealthStatus {
   status: string;
 }
 
+export interface AuthInput {
+  email: string;
+  /** @minLength 6 */
+  password: string;
+}
+
+export interface AdminUser {
+  id: number;
+  email: string;
+}
+
+export interface AuthResponse {
+  token: string;
+  user: AdminUser;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -20,6 +36,19 @@ export interface Product {
   /** @nullable */
   description?: string | null;
   available: boolean;
+  featured?: boolean;
+}
+
+export interface ProductInput {
+  name: string;
+  brand: string;
+  price: number;
+  imageUrl?: string;
+  /** @nullable */
+  imageBackUrl?: string | null;
+  /** @nullable */
+  description?: string | null;
+  available?: boolean;
   featured?: boolean;
 }
 
@@ -56,6 +85,10 @@ export interface CartItemInput {
 export type ListProductsParams = {
   brand?: string;
   search?: string;
+};
+
+export type DeleteProduct200 = {
+  success: boolean;
 };
 
 export type GetCartParams = {

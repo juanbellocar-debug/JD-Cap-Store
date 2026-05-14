@@ -5,7 +5,12 @@ import { eq, ilike, or } from "drizzle-orm";
 import {
   ListProductsQueryParams,
   GetProductParams,
+  UpdateProductParams,
+  DeleteProductParams,
+  CreateProductBody,
+  UpdateProductBody,
 } from "@workspace/api-zod";
+import { requireAuth } from "./auth";
 
 const router = Router();
 
@@ -30,8 +35,6 @@ router.get("/products", async (req, res) => {
       return res.status(400).json({ error: "Invalid query params" });
     }
     const { brand, search } = parsed.data;
-
-    let query = db.select().from(productsTable);
 
     if (brand && search) {
       const results = await db
@@ -95,6 +98,95 @@ router.get("/products/:id", async (req, res) => {
   } catch (err) {
     req.log.error({ err }, "Failed to get product");
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.post("/products", requireAuth, async (req, res) => {
+  try {
+    const parsed = CreateProductBody.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid input" });
+    }
+    const [product] = await db
+      .insert(productsTable)
+      .values({
+        name: parsed.data.name,
+        brand: parsed.data.brand,
+        price: String(parsed.data.price),
+        imageUrl: parsed.data.imageUrl ?? "",
+        imageBackUrl: parsed.data.imageBackUrl ?? null,
+        description: parsed.data.description ?? null,
+        available: parsed.data.available ?? true,
+        featured: parsed.data.featured ?? false,
+      })
+      .returning();
+    return res.status(201).json(product);
+  } catch (err) {
+    req.log.error({ err }, "Failed to create product");
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.put("/products/:id", requireAuth, async (req, res) => {
+  try {
+    const paramsParsed = UpdateProductParams.safeParse({ id: Number(req.params.id) });
+    if (!paramsParsed.success) {
+      return res.status(400).json({ error: "Invalid product id" });
+    }
+    const bodyParsed = UpdateProductBody.safeParse(req.body);
+    if (!bodyParsed.success) {
+      return res.status(400).json({ error: "Invalid input" });
+    }
+
+    const { name, brand, price, imageUrl, imageBackUrl, description, available, featured } = bodyParsed.data;
+
+    const updateData: Record<string, unknown> = {};
+    if (name !== undefined) updateData.name = name;
+    if (brand !== undefined) updateData.brand = brand;
+    if (price !== undefined) updateData.price = String(price);
+    if (imageUrl !== undefined) updateData.imageUrl = imageUrl;
+    if (imageBackUrl !== undefined) updateData.imageBackUrl = imageBackUrl;
+    if (description !== undefined) updateData.description = description;
+    if (available !== undefined) updateData.available = available;
+    if (featured !== undefined) updateData.featured = featured;
+
+    const [updated] = await db
+      .update(productsTable)
+      .set(updateData)
+      .where(eq(productsTable.id, paramsParsed.data.id))
+      .returning();
+
+    if (!updated) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    return res.json(updated);
+  } catch (err) {
+    req.log.error({ err }, "Failed to update product");
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.delete("/products/:id", requireAuth, async (req, res) => {
+  try {
+    const parsed = DeleteProductParams.safeParse({ id: Number(req.params.id) });
+    if (!parsed.success) {
+      return res.status(400).json({ error: "Invalid product id" });
+    }
+
+    const [deleted] = await db
+      .delete(productsTable)
+      .where(eq(productsTable.id, parsed.data.id))
+      .returning({ id: productsTable.id });
+
+    if (!deleted) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    return res.json({ success: true });
+  } catch (err) {
+    req.log.error({ err }, "Failed to delete product");
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
