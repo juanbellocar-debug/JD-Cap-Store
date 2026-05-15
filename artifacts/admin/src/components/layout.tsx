@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useAuth } from "./auth-provider";
-import { useGetMe, getGetMeQueryKey } from "@workspace/api-client-react";
+import { useGetMe, getGetMeQueryKey } from "../_api-client";
 import { Button } from "@/components/ui/button";
 import { LogOut, Package } from "lucide-react";
 import { Link } from "wouter";

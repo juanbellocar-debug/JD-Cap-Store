@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "@/components/auth-provider";
-import { useLogin } from "@workspace/api-client-react";
+import { useLogin } from "../_api-client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
