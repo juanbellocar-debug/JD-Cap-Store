@@ -1,5 +1,5 @@
 import { useParams } from "wouter";
-import { useGetProduct, useAddToCart, getGetProductQueryKey } from "@workspace/api-client-react";
+import { useGetProduct, useAddToCart, getGetProductQueryKey } from "../_api-client";
 import { useState, useRef, useEffect } from "react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { Button } from "@/components/ui/button";

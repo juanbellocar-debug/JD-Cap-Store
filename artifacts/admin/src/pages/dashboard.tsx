@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Layout } from "@/components/layout";
 import { useAuth } from "@/components/auth-provider";
-import { useListProducts, getListProductsQueryKey, useDeleteProduct, useUpdateProduct } from "@workspace/api-client-react";
+import { useListProducts, getListProductsQueryKey, useDeleteProduct, useUpdateProduct } from "../_api-client";
 import { ProductForm } from "@/components/product-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

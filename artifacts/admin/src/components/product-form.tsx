@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateProduct, useUpdateProduct, getListProductsQueryKey } from "@workspace/api-client-react";
+import { useCreateProduct, useUpdateProduct, getListProductsQueryKey } from "../_api-client";
 import { useAuth } from "./auth-provider";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";

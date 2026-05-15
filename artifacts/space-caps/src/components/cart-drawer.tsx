@@ -1,5 +1,5 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { useGetCart, useRemoveFromCart } from "@workspace/api-client-react";
+import { useGetCart, useRemoveFromCart } from "../_api-client";
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";

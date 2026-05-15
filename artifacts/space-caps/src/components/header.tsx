@@ -1,5 +1,5 @@
 import { useCartSession } from "@/hooks/use-cart-session";
-import { useGetCart } from "@workspace/api-client-react";
+import { useGetCart } from "../_api-client";
 import { Link } from "wouter";
 import { Search, ShoppingBag } from "lucide-react";
 import { CartDrawer } from "./cart-drawer";

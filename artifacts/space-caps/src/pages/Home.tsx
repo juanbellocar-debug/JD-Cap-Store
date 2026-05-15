@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useListProducts, useGetFeaturedProducts, useListBrands, useAddToCart } from "@workspace/api-client-react";
+import { useListProducts, useGetFeaturedProducts, useListBrands, useAddToCart } from "../_api-client";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";

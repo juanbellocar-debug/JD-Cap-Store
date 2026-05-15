@@ -1,26 +1,15 @@
 {
-  "name": "workspace",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "killers-stars",
+  "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "artifacts/space-caps",
-    "artifacts/admin",
-    "artifacts/api-server",
-    "lib/api-client-react",
-    "lib/api-zod",
-    "lib/db",
-    "lib/api-spec",
-    "scripts"
-  ],
   "scripts": {
-    "build": "npm run build:store && npm run build:admin && npm run build:api",
-    "build:api": "npm run build --workspace=artifacts/api-server",
-    "build:store": "BASE_PATH=/ npm run build --workspace=artifacts/space-caps",
-    "build:admin": "BASE_PATH=/admin/ npm run build --workspace=artifacts/admin",
-    "start": "node artifacts/api-server/dist/index.mjs",
+    "build": "npm run build:store && npm run build:admin && npm run build:server",
+    "build:store": "cd artifacts/space-caps && npm install --legacy-peer-deps && npx vite build",
+    "build:admin": "cd artifacts/admin && npm install --legacy-peer-deps && npx vite build",
+    "build:server": "cd server && npm install --legacy-peer-deps && node build.mjs",
+    "start": "node server/dist/index.mjs",
     "typecheck:libs": "tsc --build",
-    "typecheck": "npm run typecheck:libs && npm run typecheck --workspaces --if-present"
+    "typecheck": "pnpm run typecheck:libs && pnpm run typecheck --recursive --if-present"
   },
   "devDependencies": {
     "typescript": "~5.9.2",
