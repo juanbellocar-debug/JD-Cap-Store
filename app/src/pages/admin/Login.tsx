@@ -15,15 +15,23 @@ export default function Login() {
   const { login } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
   const loginMutation = useLogin();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     loginMutation.mutate({ data: { email, password } }, {
-      onSuccess: (data) => { login(data.token); setLocation("/admin/dashboard"); },
-      onError: () => {
-        toast({ title: "Access Denied", description: "Invalid credentials. Please verify your operative status.", variant: "destructive" });
+      onSuccess: (data) => {
+        login(data.token);
+        setLocation("/admin/dashboard");
       },
+      onError: () => {
+        toast({
+          title: "Access Denied",
+          description: "Invalid credentials. Please verify your operative status.",
+          variant: "destructive"
+        });
+      }
     });
   };
 
@@ -41,11 +49,27 @@ export default function Login() {
           <CardContent className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-muted-foreground">Operative Email</Label>
-              <Input id="email" type="email" required value={email} onChange={e => setEmail(e.target.value)} className="bg-input/50 border-border focus-visible:ring-primary" placeholder="admin@killersstars.com" />
+              <Input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="bg-input/50 border-border focus-visible:ring-primary"
+                placeholder="admin@killersstars.com"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password" className="text-muted-foreground">Passphrase</Label>
-              <Input id="password" type="password" required value={password} onChange={e => setPassword(e.target.value)} className="bg-input/50 border-border focus-visible:ring-primary" placeholder="••••••••" />
+              <Input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                className="bg-input/50 border-border focus-visible:ring-primary"
+                placeholder="••••••••"
+              />
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-4 pt-4">

@@ -9,8 +9,11 @@ export function Layout({ children }: { children: ReactNode }) {
   const { token, logout } = useAuth();
 
   const { data: user } = useGetMe({
-    query: { queryKey: getGetMeQueryKey(), enabled: !!token },
-    request: { headers: { Authorization: `Bearer ${token}` } },
+    query: {
+      queryKey: getGetMeQueryKey(),
+      enabled: !!token
+    },
+    request: { headers: { Authorization: `Bearer ${token}` } }
   });
 
   return (

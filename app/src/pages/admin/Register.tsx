@@ -15,6 +15,7 @@ export default function Register() {
   const { login } = useAuth();
   const [, setLocation] = useLocation();
   const { toast } = useToast();
+
   const registerMutation = useRegister();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,11 +24,19 @@ export default function Register() {
       toast({ title: "Invalid passphrase", description: "Must be at least 6 characters.", variant: "destructive" });
       return;
     }
+
     registerMutation.mutate({ data: { email, password } }, {
-      onSuccess: (data) => { login(data.token); setLocation("/admin/dashboard"); },
-      onError: (err: any) => {
-        toast({ title: "Clearance rejected", description: err.message || "An error occurred during registration.", variant: "destructive" });
+      onSuccess: (data) => {
+        login(data.token);
+        setLocation("/admin/dashboard");
       },
+      onError: (err: any) => {
+        toast({
+          title: "Clearance rejected",
+          description: err.message || "An error occurred during registration.",
+          variant: "destructive"
+        });
+      }
     });
   };
 
@@ -45,11 +54,28 @@ export default function Register() {
           <CardContent className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-muted-foreground">Operative Email</Label>
-              <Input id="email" type="email" required value={email} onChange={e => setEmail(e.target.value)} className="bg-input/50 border-border focus-visible:ring-primary" placeholder="admin@killersstars.com" />
+              <Input
+                id="email"
+                type="email"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="bg-input/50 border-border focus-visible:ring-primary"
+                placeholder="admin@killersstars.com"
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password" className="text-muted-foreground">Passphrase</Label>
-              <Input id="password" type="password" required minLength={6} value={password} onChange={e => setPassword(e.target.value)} className="bg-input/50 border-border focus-visible:ring-primary" placeholder="••••••••" />
+              <Input
+                id="password"
+                type="password"
+                required
+                minLength={6}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                className="bg-input/50 border-border focus-visible:ring-primary"
+                placeholder="••••••••"
+              />
               <p className="text-xs text-muted-foreground/60">Minimum 6 characters required.</p>
             </div>
           </CardContent>
