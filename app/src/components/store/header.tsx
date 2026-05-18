@@ -41,7 +41,7 @@ export function Header() {
           </div>
 
           <Link href="/" className="text-xl font-bold tracking-widest uppercase text-white hover:text-gray-300 transition-colors">
-            KILLERS STARS
+            JDED
           </Link>
 
           <div className="flex-1 flex justify-end">

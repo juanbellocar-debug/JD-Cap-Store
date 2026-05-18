@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Switch, Route, useLocation } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -5,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/components/admin/auth-provider";
 import { AnimatedStarfield } from "@/components/store/animated-starfield";
 import { Header } from "@/components/store/header";
+import { IntroScreen } from "@/components/store/intro-screen";
 import Home from "@/pages/Home";
 import ProductDetail from "@/pages/Product";
 import NotFound from "@/pages/not-found";
@@ -36,13 +38,22 @@ function Footer() {
   return (
     <footer className="w-full border-t border-white/10 py-8 relative z-10 bg-black/50 backdrop-blur-sm">
       <div className="container mx-auto px-4 text-center">
-        <p className="text-xs tracking-widest text-muted-foreground">KILLERS STARS © 2025</p>
+        <p className="text-xs tracking-widest text-muted-foreground">The Edras &amp; Jesus Dynasty © 2025</p>
       </div>
     </footer>
   );
 }
 
 function StoreLayout() {
+  const [showIntro, setShowIntro] = useState(() => {
+    try { return !sessionStorage.getItem("jded_entered"); } catch { return true; }
+  });
+
+  const handleEnter = () => {
+    try { sessionStorage.setItem("jded_entered", "1"); } catch {}
+    setShowIntro(false);
+  };
+
   return (
     <div className="relative min-h-screen text-white overflow-hidden bg-black selection:bg-white selection:text-black">
       <AnimatedStarfield />
@@ -56,6 +67,7 @@ function StoreLayout() {
       </main>
       <Footer />
       <WhatsAppButton />
+      {showIntro && <IntroScreen onEnter={handleEnter} />}
     </div>
   );
 }
