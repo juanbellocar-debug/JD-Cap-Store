@@ -13,6 +13,7 @@ export function Header() {
   const { data: cart } = useGetCart({ sessionId }, { query: { enabled: !!sessionId } });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   const cartItemCount = cart?.items.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
   return (
@@ -61,6 +62,7 @@ export function Header() {
           </div>
         </div>
       </header>
+
       <CartDrawer open={isCartOpen} onOpenChange={setIsCartOpen} sessionId={sessionId} />
     </>
   );
