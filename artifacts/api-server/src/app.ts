@@ -37,8 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 if (process.env.NODE_ENV === "production") {
-  const adminDist = path.join(__dirname, "../../artifacts/admin/dist/public");
-  const storeDist = path.join(__dirname, "../../artifacts/space-caps/dist/public");
+  const adminDist = path.join(__dirname, "../../admin/dist/public");
+  const storeDist = path.join(__dirname, "../../space-caps/dist/public");
 
   app.use("/admin", express.static(adminDist));
   app.get("/admin/{*path}", (_req, res) => {
