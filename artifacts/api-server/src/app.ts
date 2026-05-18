@@ -41,12 +41,12 @@ if (process.env.NODE_ENV === "production") {
   const storeDist = path.join(__dirname, "../../artifacts/space-caps/dist/public");
 
   app.use("/admin", express.static(adminDist));
-  app.get("/admin/*", (_req, res) => {
+  app.get("/admin/{*path}", (_req, res) => {
     res.sendFile(path.join(adminDist, "index.html"));
   });
 
   app.use(express.static(storeDist));
-  app.get("*", (_req, res) => {
+  app.get("/{*path}", (_req, res) => {
     res.sendFile(path.join(storeDist, "index.html"));
   });
 }
