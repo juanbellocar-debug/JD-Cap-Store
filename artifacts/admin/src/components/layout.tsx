@@ -22,7 +22,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center gap-2 text-primary font-bold text-lg hover:text-primary/80 transition-colors">
             <Package className="w-5 h-5" />
-            KILLERS STARS
+            The Edras &amp; Jesus Dynasty
           </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-muted-foreground">{user?.email}</span>

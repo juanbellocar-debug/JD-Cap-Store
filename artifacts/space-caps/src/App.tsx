@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,6 +8,7 @@ import Home from "@/pages/Home";
 import ProductDetail from "@/pages/Product";
 import { Header } from "@/components/header";
 import { AnimatedStarfield } from "@/components/animated-starfield";
+import { IntroScreen } from "@/components/intro-screen";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +34,7 @@ function Footer() {
   return (
     <footer className="w-full border-t border-white/10 py-8 relative z-10 bg-black/50 backdrop-blur-sm">
       <div className="container mx-auto px-4 text-center">
-        <p className="text-xs tracking-widest text-muted-foreground">KILLERS STARS © 2025</p>
+        <p className="text-xs tracking-widest text-muted-foreground">The Edras &amp; Jesus Dynasty © 2025</p>
       </div>
     </footer>
   );
@@ -49,6 +51,15 @@ function Router() {
 }
 
 function App() {
+  const [showIntro, setShowIntro] = useState(() => {
+    try { return !sessionStorage.getItem("jded_entered"); } catch { return true; }
+  });
+
+  const handleEnter = () => {
+    try { sessionStorage.setItem("jded_entered", "1"); } catch {}
+    setShowIntro(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -62,6 +73,7 @@ function App() {
             <Footer />
             <WhatsAppButton />
           </div>
+          {showIntro && <IntroScreen onEnter={handleEnter} />}
         </WouterRouter>
         <Toaster />
       </TooltipProvider>
