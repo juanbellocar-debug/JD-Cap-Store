@@ -63,12 +63,14 @@ export default function Home() {
             </h1>
           </motion.div>
 
+          {/* Hero floating cap — transparent blend with starfield */}
           <motion.div
             animate={{ y: [0, -18, 0] }}
             transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
             className="relative w-full max-w-3xl flex items-center justify-center my-6"
             style={{ minHeight: 340 }}
           >
+            {/* Radial glow behind cap */}
             <div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
@@ -149,19 +151,27 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.07, duration: 0.55 }}
                 className="group relative cursor-pointer"
+                data-testid={`card-product-${product.id}`}
               >
+                {/* Card image area — fully transparent, no bg box */}
                 <div className="relative flex items-center justify-center mb-4 overflow-visible" style={{ minHeight: 200 }}>
+                  {/* Hover overlay */}
                   <div className="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
-                    <motion.div initial={{ y: 10, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}>
+                    <motion.div
+                      initial={{ y: 10, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                    >
                       <button
                         className="pointer-events-auto bg-white text-black text-[10px] tracking-[0.25em] uppercase px-5 py-2 font-semibold hover:bg-white/90 transition-colors"
                         onClick={(e) => handleAddToCart(e, product.id, product.name)}
+                        data-testid={`button-add-to-cart-${product.id}`}
                       >
                         ADD TO CART
                       </button>
                     </motion.div>
                   </div>
 
+                  {/* Ambient glow — only on hover */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-full"
                     style={{
@@ -170,6 +180,7 @@ export default function Home() {
                     }}
                   />
 
+                  {/* Cap image — transparent PNG floats on the starfield */}
                   <motion.img
                     src={product.imageUrl || ""}
                     alt={product.name}
