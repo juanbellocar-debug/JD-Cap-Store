@@ -33,18 +33,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen text-white pb-24" style={{ zIndex: 1 }}>
-      {/* Category Nav */}
-      <nav className="border-b border-white/10 relative z-10">
-        <div className="container mx-auto px-4">
-          <ul className="flex flex-wrap items-center justify-center gap-6 py-4 text-xs md:text-sm tracking-widest text-white/50">
-            {["11 BAYS", "A BATHING APE", "BARRAS HATS", "DANDY HATS", "NEW ERA", "SUPREME"].map(category => (
-              <li key={category}>
-                <a href="#" className="hover:text-white transition-colors duration-200">{category}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       {heroProduct && (
@@ -63,14 +51,13 @@ export default function Home() {
             </h1>
           </motion.div>
 
-          {/* Hero floating cap — transparent blend with starfield */}
+          {/* Hero floating cap */}
           <motion.div
             animate={{ y: [0, -18, 0] }}
             transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
             className="relative w-full max-w-3xl flex items-center justify-center my-6"
-            style={{ minHeight: 340 }}
+            style={{ minHeight: 300 }}
           >
-            {/* Radial glow behind cap */}
             <div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
@@ -82,10 +69,10 @@ export default function Home() {
               <img
                 src={heroProduct.imageUrl || ""}
                 alt={heroProduct.name}
-                className="w-full max-w-xl object-contain select-none transition-transform duration-700 group-hover:scale-105"
+                className="w-full max-w-sm md:max-w-xl object-contain select-none transition-transform duration-700 group-hover:scale-105"
                 style={{
                   filter: "drop-shadow(0 0 50px rgba(160,140,255,0.30)) drop-shadow(0 0 18px rgba(255,255,255,0.20))",
-                  maxHeight: 380,
+                  maxHeight: 340,
                 }}
               />
             </Link>
@@ -97,7 +84,7 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 0.9 }}
             className="text-center mt-2"
           >
-            <h2 className="text-lg md:text-xl font-light tracking-[0.18em] mb-2 text-white/90">
+            <h2 className="text-base md:text-xl font-light tracking-[0.18em] mb-2 text-white/90">
               "{heroProduct.name}"
             </h2>
             <p className="text-white/50 font-mono text-sm tracking-widest">
@@ -142,7 +129,7 @@ export default function Home() {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-14 md:gap-x-6">
           {products?.map((product, index) => (
             <Link key={product.id} href={`/product/${product.id}`}>
               <motion.div
@@ -153,50 +140,46 @@ export default function Home() {
                 className="group relative cursor-pointer"
                 data-testid={`card-product-${product.id}`}
               >
-                {/* Card image area — fully transparent, no bg box */}
-                <div className="relative flex items-center justify-center mb-4 overflow-visible" style={{ minHeight: 200 }}>
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
-                    <motion.div
-                      initial={{ y: 10, opacity: 0 }}
-                      whileInView={{ y: 0, opacity: 1 }}
+                {/* Card image area — transparent, floats on starfield */}
+                <div className="relative flex items-center justify-center mb-5 overflow-visible" style={{ minHeight: 160 }}>
+                  {/* Quick-add on hover (desktop) */}
+                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-center pb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
+                    <button
+                      className="pointer-events-auto bg-white text-black text-[10px] tracking-[0.25em] uppercase px-4 py-2 font-semibold hover:bg-white/90 transition-colors"
+                      onClick={(e) => handleAddToCart(e, product.id, product.name)}
+                      data-testid={`button-add-to-cart-${product.id}`}
                     >
-                      <button
-                        className="pointer-events-auto bg-white text-black text-[10px] tracking-[0.25em] uppercase px-5 py-2 font-semibold hover:bg-white/90 transition-colors"
-                        onClick={(e) => handleAddToCart(e, product.id, product.name)}
-                        data-testid={`button-add-to-cart-${product.id}`}
-                      >
-                        ADD TO CART
-                      </button>
-                    </motion.div>
+                      + CARRITO
+                    </button>
                   </div>
 
-                  {/* Ambient glow — only on hover */}
+                  {/* Hover glow */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-full"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                      background: "radial-gradient(ellipse 70% 60% at 50% 55%, rgba(100,80,220,0.12) 0%, transparent 75%)",
+                      background: "radial-gradient(ellipse 70% 60% at 50% 55%, rgba(100,80,220,0.14) 0%, transparent 75%)",
                       filter: "blur(12px)",
                     }}
                   />
 
-                  {/* Cap image — transparent PNG floats on the starfield */}
+                  {/* Cap PNG — floats on starfield */}
                   <motion.img
                     src={product.imageUrl || ""}
                     alt={product.name}
-                    className="w-full object-contain select-none relative z-10 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full object-contain select-none relative z-10"
                     style={{
                       filter: "drop-shadow(0 0 22px rgba(160,140,255,0.28)) drop-shadow(0 4px 14px rgba(255,255,255,0.12))",
-                      maxHeight: 200,
+                      maxHeight: 160,
                     }}
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.4 }}
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ repeat: Infinity, duration: 5 + index * 0.3, ease: "easeInOut" }}
+                    whileHover={{ scale: 1.07, y: -8 }}
                   />
                 </div>
 
-                <div className="text-center space-y-1">
+                <div className="text-center space-y-1 px-1">
                   <p className="text-[10px] text-white/40 uppercase tracking-[0.25em]">{product.brand}</p>
-                  <h3 className="text-xs tracking-[0.12em] uppercase text-white/90">"{product.name}"</h3>
+                  <h3 className="text-[11px] leading-tight tracking-[0.1em] uppercase text-white/90 line-clamp-2">"{product.name}"</h3>
                   <p className="font-mono text-sm pt-1 text-white/70">${product.price.toFixed(2)}</p>
                 </div>
               </motion.div>
@@ -204,6 +187,26 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Shipping Info */}
+      <section className="relative z-10 border-t border-white/10 py-14 mt-8">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-0">
+            {[
+              { icon: "🇨🇴", line1: "Envíos a toda", line2: "Colombia" },
+              { icon: "🚚", line1: "Entregas en", line2: "Medellín" },
+              { icon: "⏰", line1: "Atención", line2: "24 / 7" },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col items-center text-center sm:flex-1">
+                <span className="text-3xl mb-3" role="img">{item.icon}</span>
+                <p className="text-[11px] tracking-[0.3em] uppercase text-white/50">{item.line1}</p>
+                <p className="text-[11px] tracking-[0.3em] uppercase text-white/80 font-medium">{item.line2}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
