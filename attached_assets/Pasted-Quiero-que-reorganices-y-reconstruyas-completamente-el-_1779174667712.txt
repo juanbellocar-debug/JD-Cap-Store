@@ -1,0 +1,180 @@
+Quiero que reorganices y reconstruyas completamente el HOME para que quede EXACTAMENTE igual a las capturas que te envié.
+
+IMPORTANTE:
+NO quiero placeholders.
+NO quiero productos genéricos.
+NO quiero imágenes falsas.
+
+Quiero usar EXACTAMENTE las mismas gorras PNG de las imágenes originales.
+
+══════════════════
+DISEÑO HOME
+══════════════════
+
+El HOME debe verse idéntico a las capturas:
+
+* Fondo galaxy oscuro premium
+* Glow azul y morado
+* Partículas moviéndose
+* Humo animado suave
+* Productos flotando lentamente
+* Estilo luxury fashion / streetwear premium
+* Distribución visual idéntica
+* Espaciado elegante
+* Diseño cinematográfico
+
+══════════════════
+PRODUCTOS EXACTOS
+══════════════════
+
+Mostrar exactamente estos productos:
+
+* DANDY HATS "ONYX"
+* DANDY HATS "LOST DANDY"
+* A BATHING APE "BAPE STAR CAP"
+* DANDY HATS "DANDY X LOST SOLID MORNING BELLS"
+* 11 BAYS "11 BAYS GALAXY"
+* BARRAS HATS "BARRAS CLASSIC BLACK"
+* DANDY HATS "PROJECT NO"
+* COMME DES GARCONS "CDG LOGO CAP"
+
+Cada producto debe tener:
+
+* Imagen PNG real
+* Marca arriba
+* Nombre exacto
+* Precio debajo
+* Glow detrás de la gorra
+* Hover premium
+* Floating animation independiente
+* Página individual del producto
+
+══════════════════
+PROBLEMA ACTUAL VERCEL
+══════════════════
+
+El problema actual es que Vercel NO está mostrando las imágenes PNG.
+
+El diseño sí carga.
+Las animaciones sí funcionan.
+La información de envíos sí aparece.
+
+PERO:
+
+* las gorras no se muestran
+* las imágenes están rotas
+* la información de productos falla
+
+══════════════════
+SOLUCIÓN OBLIGATORIA
+══════════════════
+
+1. Mover TODAS las imágenes reales a:
+
+public/products/
+
+2. Usar rutas absolutas:
+
+'/products/onyx.png'
+'/products/lost-dandy.png'
+
+3. NO usar imports rotos ni rutas relativas:
+   ../../assets/
+
+4. Verificar compatibilidad Vercel:
+
+* png
+* webp
+* jpg
+
+5. Crear correctamente el array de productos:
+
+* title
+* brand
+* price
+* image
+* description
+* slug
+
+6. Confirmar que renderiza correctamente:
+
+<img src={product.image} />
+
+7. Hacer redeploy COMPLETO a Vercel.
+
+8. Confirmar funcionamiento en:
+
+* iPhone Safari
+* móvil
+* desktop
+
+══════════════════
+ANIMACIONES PREMIUM
+══════════════════
+
+Agregar:
+
+* floating animation
+* galaxy particles
+* moving stars
+* smoke animation
+* cinematic transitions
+* blur transitions
+* smooth fade animations
+
+Cada producto debe moverse ligeramente a diferente velocidad para dar efecto premium flotante.
+
+══════════════════
+PÁGINA INDIVIDUAL
+══════════════════
+
+Al tocar una gorra:
+
+* abrir página individual
+* mantener fondo galaxy
+* PNG flotando
+* glow premium
+* botones grandes
+
+Botones:
+
+* COMPRAR AHORA
+* AÑADIR AL CARRITO
+
+══════════════════
+CHECKOUT
+══════════════════
+
+COMPRAR AHORA debe abrir WhatsApp automáticamente con mensaje prellenado:
+
+Hola! Quiero comprar:
+*[Nombre del producto]*
+Marca: [Marca]
+Precio: $[Precio]
+¿Está disponible?
+
+══════════════════
+INFO FOOTER
+══════════════════
+
+Abajo del HOME agregar:
+
+🇨🇴 Envíos a toda Colombia
+🚚 Medellín
+⏰ Atención 24/7
+
+Diseño minimalista elegante premium.
+
+══════════════════
+INTRO JD
+══════════════════
+
+Al entrar o recargar:
+
+* mostrar intro JD SIEMPRE
+* partículas flotando
+* humo animado
+* transición cinematográfica
+* fade in/out premium
+
+Quiero que TODO quede exactamente igual a las capturas originales.
