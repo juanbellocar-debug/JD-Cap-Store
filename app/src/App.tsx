@@ -7,6 +7,7 @@ import { AuthProvider } from "@/components/admin/auth-provider";
 import { AnimatedStarfield } from "@/components/store/animated-starfield";
 import { Header } from "@/components/store/header";
 import { IntroScreen } from "@/components/store/intro-screen";
+import { CornerAmbient } from "@/components/store/corner-ambient";
 import Home from "@/pages/Home";
 import ProductDetail from "@/pages/Product";
 import NotFound from "@/pages/not-found";
@@ -68,6 +69,7 @@ function StoreLayout() {
       <Footer />
       <WhatsAppButton />
       {showIntro && <IntroScreen onEnter={handleEnter} />}
+      <CornerAmbient />
     </div>
   );
 }

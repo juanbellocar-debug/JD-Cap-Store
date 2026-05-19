@@ -9,6 +9,7 @@ import ProductDetail from "@/pages/Product";
 import { Header } from "@/components/header";
 import { AnimatedStarfield } from "@/components/animated-starfield";
 import { IntroScreen } from "@/components/intro-screen";
+import { CornerAmbient } from "@/components/corner-ambient";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,7 @@ function App() {
             <WhatsAppButton />
           </div>
           {showIntro && <IntroScreen onEnter={handleEnter} />}
+          <CornerAmbient />
         </WouterRouter>
         <Toaster />
       </TooltipProvider>
